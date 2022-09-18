@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body{
+            font-family: sans-serif; 
+        }
+      #top-section {
+        width: 40%;
+        height: 200px;
+        margin: auto;
+      }
+      #top-section > h1 {
+        padding: 0% 10%;
+        text-align: center;
+      }
+      #top-section > p {
+        text-align: center;
+      }
+
+      #container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: 20px;
+        width: 80%;
+        margin: auto;
+      }
+
+      #container > div {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        text-align: center;
+      }
+
+      #container > div:nth-child(1) > h3 + h2{
+        color: green;
+      }
+      #container > div:nth-child(2) > h3 + h2{
+        color: orange;
+      }
+      #container > div:nth-child(3) > h3 + h2{
+        color: #007aff;
+      }
+
+      p + p {
+        padding: 0px 10px;
+      }
+      h2 + p{
+          font-style: italic;
+      }
+
+      .button-outer,
+      .solid-button {
+        font-size: 14px;
+        padding: 5px 15px;
+        background-color: white;
+        color: #007aff;
+        border: 1px solid #007aff;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .solid-button {
+        background: #007aff;
+        color: white;
+      }
+      /* medium */
+      @media all and (min-width: 381px) and (max-width: 700px) {
+        #container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        #top-section{
+          height: auto;
+        }
+      }
+
+      /* small */
+      @media all and (min-width: 50px) and (max-width: 380px) {
+        #container {
+          grid-template-columns: repeat(1, 1fr);
+        }
+        #top-section > h1 {
+          padding: 0%;
+        }
+        #top-section {
+          width: 100%;
+          height: auto
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="top-section">
+      <h1>Choose a plan that right for your business</h1>
+      <p>
+        We collect reviews from our users so you can get an honest opinion of
+        what an experience with our website are really like!
+      </p>
+    </div>
+
+    <!-- bottom section -->
+
+    <div id="container">
+      <div>
+        <h3>Starter Plan</h3>
+        <h2>Free</h2>
+        <p>Per Month</p>
+        <p>
+          We collect reviews from our users so you can get an honest opinion of
+          what an experience with our website.
+        </p>
+        <button class="button-outer">Start Now</button>
+      </div>
+      <div>
+        <h3>Business Plan</h3>
+        <h2>$39.00</h2>
+        <p>Per Month</p>
+        <p>
+          We collect reviews from our users so you can get an honest opinion of
+          what an experience with our website.
+        </p>
+        <button class="solid-button">Start Now</button>
+      </div>
+      <div>
+        <h3>Premium Plan</h3>
+        <h2>$59.00</h2>
+        <p>Per Month</p>
+        <p>
+          We collect reviews from our users so you can get an honest opinion of
+          what an experience with our website.
+        </p>
+        <button class="button-outer">Start Now</button>
+      </div>
+    </div>
+  </body>
+</html>

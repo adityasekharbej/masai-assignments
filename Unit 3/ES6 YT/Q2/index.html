@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #search_results{
+            
+            width: 90%;
+            margin: auto;
+            margin-top:30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        #search_results img{
+            width: 100%;
+        }
+        #navbar{
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+            margin: 20px 0;
+        }
+        #navbar>div{
+            display: flex;
+            justify-content: space-between;
+            /* border: 1px solid red; */
+        }
+        #left{
+            margin-left: 30px;
+        }
+        #right{
+            margin-right: 30px;
+        }
+        input{
+            margin-right: 15px;
+            border-radius: 10px;
+            width: 300px;
+            border: 1px solid #535353;
+        }
+        button{
+            border-radius: 10px;
+            border: 1px solid #535353;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div id="left">
+            
+            <img src="https://th.bing.com/th/id/OIP.MruU_1fBIrki4bXAqbJTHgHaB2?w=345&h=87&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="">
+           
+        </div>
+        <div id="right">
+            <input type="text" id="search">
+            <button onclick="searchVideos()">Search</button>
+        </div>
+    </div>
+   
+    <div id="search_results"></div>
+</body>
+</html>
+
+<script>
+const search_results_div = document.getElementById("search_results")
+// fetching data here
+const searchVideos = async ()=> {
+
+    try {
+        let input = document.getElementById('search').value;
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${input}&key=AIzaSyBqhumu0rWtX2JmZd9WcYJAVIsR8nVXpbE&maxResults=20`);
+        let data = await res.json();
+        let videos = data.items;
+        console.log(videos)
+        appendVideos(videos)
+
+    }catch (error){
+        console.log(error)
+    }
+}
+
+
+const appendVideos =(data) =>{
+    search_results_div.innerHTML = null;
+    data.forEach((elem)=>{
+        let div = document.createElement("div");
+
+        let title = document.createElement('p');
+        title.innerText = elem.snippet.title;
+
+        // let iframe = document.createElement('iframe');
+        // iframe.src = `https://www.youtube.com/embed/${elem.id.videoId}`;
+        // iframe.allow = "fullscreen"
+
+        let img = document.createElement('img');
+        img.src = elem.snippet.thumbnails.high.url;
+        img.addEventListener("click", ()=>{
+            playvideo(elem)
+        });
+        div.append(img, title);
+        search_results_div.append(div);
+    });
+};
+let video =  []
+playvideo = (elem) => {
+    video.push(elem);
+    localStorage.setItem("videolocal", JSON.stringify(video))
+    window.location.href = "playVideo.html"
+}
+
+
+
+async function trending(){
+    try {
+        let input = document.getElementById('search').value;
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${input}&key=AIzaSyBqhumu0rWtX2JmZd9WcYJAVIsR8nVXpbE&maxResults=50&chart=mostPopular`);
+        let data = await res.json();
+        let videos = data.items;
+        console.log(videos)
+        appendVideos(videos)
+
+    }catch (error){
+        console.log(error)
+    }
+}
+
+trending();
+</script>

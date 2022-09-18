@@ -1,0 +1,21 @@
+body{
+    font-family:sans-serif;
+}
+
+#container {
+    width: 60%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 40px;
+}
+
+.priceDiv>p+p{
+    text-decoration: line-through;
+}
+.priceDiv {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}

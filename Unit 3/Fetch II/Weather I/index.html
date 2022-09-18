@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mainDiv{
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div id="mainDiv">
+        <div id="info">
+            <input type="text" id="city"/>
+            <button onclick="getweather()">Get Weather</button>
+            <div id="container"></div>
+        </div>
+        <div id="map">
+            <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org">123movies</a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net"></a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+let container=document.getElementById("container");
+async function getweather(){
+    try{
+
+        let city=document.getElementById("city").value;
+
+            let res=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=32ce108115971eaf5b586defc87531c2&units=metric`);
+
+            let data = await res.json();
+            appenddata(data);
+
+            console.log("data:",data);
+        }
+    catch (err) 
+        {
+            console.log("err",err);
+        }   
+}
+
+function getTime(t){
+    let unix_timestamp = t
+    // Create a new JavaScript Date object based on the timestamp
+    // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+    var date = new Date(unix_timestamp * 1000);
+    // Hours part from the timestamp
+    var hours = date.getHours();
+    // Minutes part from the timestamp
+    var minutes = "0" + date.getMinutes();
+    // Seconds part from the timestamp
+    var seconds = "0" + date.getSeconds();
+
+    // Will display time in 10:30:23 format
+    return formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+}
+function appenddata(data){
+    container.innerHTML=null;
+    
+    let name=document.createElement('h3');
+    name.innerText=`City: ${data.name}`;
+
+    let temp=document.createElement('h3');
+    temp.innerText=`Temp: ${data.main.temp}℃`;
+
+    let temp_min=document.createElement('h3');
+    temp_min.innerText=`Min Temp: ${data.main.temp_min}℃`;
+
+    let temp_max=document.createElement('h3');
+    temp_max.innerText=`Max Temp: ${data.main.temp_max}℃`;
+
+    let wind=document.createElement('h3');
+    wind.innerText=`Wind Speed: ${data.wind.speed}km/h`;
+
+    let clouds=document.createElement('h3');
+    clouds.innerText=`Cloud: ${data.clouds.all}%`;
+
+    let sunrise= document.createElement('h3');
+    sunrise.innerText=`Sunrise: ${getTime(data.sys.sunrise)} AM`;
+
+    let sunset= document.createElement('h3');
+    sunset.innerText=`Sunset: ${getTime(data.sys.sunset)} PM`
+
+    container.append(name, temp, temp_min,temp_max,wind, clouds, sunrise, sunset)
+
+    let iframe = document.querySelector('iframe');
+    iframe.src = `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

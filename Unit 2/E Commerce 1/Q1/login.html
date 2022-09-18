@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="form">
+        <input id="email" type="text" placeholder="Enter email">
+        <input id="pass" type="password" placeholder="Enter password">
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
+
+<script>
+    var users = JSON.parse(localStorage.getItem("signupList"));
+    document.querySelector("#form").addEventListener("submit", formSubmit)
+    var form = document.querySelector("#form");
+
+    function formSubmit(event){
+        event.preventDefault();
+        var email = form.email.value;
+        var pass = form.pass.value;
+
+        var flag = false;
+        for(var i = 0; i < users.length; i++){
+            if(users[i].email == email && users[i].pass == pass){
+                flag = true;
+            }
+        }
+
+        if(flag == true){
+            alert("Login Successful");
+        }
+        else {
+            alert("Enter valid email and password");
+        }
+    }
+</script>

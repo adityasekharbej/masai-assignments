@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        #navbar{
+            width: 80%;
+            height: 80px;
+            background-color: #1c2938;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 5px;
+        }
+        #navbar>  div{
+            width: 28%;
+            height: 100%;
+        }
+        #navbar > div:first-child{
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+            padding: 25px;
+        }
+        #navbar > div:last-child{
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            padding: 25px;
+        }
+        select{
+            background-color: #1c2938;
+            border: 0px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div>
+            MEGAWIDTH
+        </div>
+        <div>
+            <div>Home</div>
+            <div>About</div>
+            <div>Blog</div>
+            <div>
+                <select>
+                    <option value="Page">Page</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

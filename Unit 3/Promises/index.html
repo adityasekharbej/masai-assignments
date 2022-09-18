@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(250, 250, 156);
+
+        }
+        #displayFood{
+            background-color: #f62a29;
+            color: white;
+            border-radius: 10px;
+            width: 30%;
+            margin: auto;
+            text-align: center;
+            margin-top:-70px;
+            font-size:30px;
+            padding-bottom: 20px;
+        }
+        #orderId{
+            display:flex;
+            justify-content:flex-end;
+            margin-right: 40px;
+        }
+        img{
+            width: 100%;
+            border-radius: 10px;
+
+        }
+        p{
+            font-size:40px;
+            font-weight: 800;
+        }
+
+    </style>
+</head>
+<body>
+<!--     
+    <input type="checkbox" id="food" name="Burger" value="Burger">
+    <label for="Burger">Burger</label>
+
+    <input type="checkbox" id="food" name="Pizza" value="Pizza">
+    <label for="Pizza">Pizza</label>
+
+    <input type="checkbox" id="food" name="Chicken Wings" value="Chicken Wings">
+    <label for="Chicken Wings">Chicken Wings</label>
+
+    <input type="checkbox" id="food" name="Fries" value="Fries">
+    <label for="Fries">Fries</label> -->
+
+    
+    <select id="food">
+        <option value="Burger">Burger</option>
+        <option value="Pizza">Pizza</option>
+        <option value="Chicken Wings">Chicken Wings</option>
+        <option value="Fries">Fries</option>
+    </select>
+    <button onclick="orderFood()">Order Food</button>
+    <div id="orderId">
+
+    </div>
+    <div id="displayFood">
+
+    </div>
+</body>
+</html>
+<script>
+
+    let counter = 0;
+    function orderFood() {
+        let display = document.getElementById("displayFood");
+        display.innerHTML = null;
+        let orderId = document.getElementById("orderId");
+        orderId.innerHTML = null;
+
+        let food = document.getElementById("food").value;
+        console.log(food);
+        let store = "open";
+        let time = Math.random()*5000;
+
+        if(counter >= 10) {
+            store = "close";
+        }
+
+
+        let foodProm = new Promise(function(resolve, reject) {
+            if(store == "close"){
+                reject("McDonald is Closed")
+            }else{
+                setTimeout(function(){
+                    resolve(food);
+                }, time)
+            }
+        })
+
+
+        let img = document.createElement("img");
+        let desc = document.createElement("h2");
+        let orderid = document.createElement("p")
+        let id = Math.floor(Math.random()*20 + 1);
+        foodProm.then(function(res){
+            switch(res){
+                case "Burger":
+                    img.src = "https://th.bing.com/th/id/OIP.nYqUu8Ha8DKp3OYDfvqOcAHaGq?w=211&h=190&c=7&r=0&o=5&dpr=1.5&pid=1.7";
+                    desc.innerText = `Your ${food} is ready!`;
+                    orderid.innerText = `Order id is #${id}`;
+                    display.append(img, desc);
+                    orderId.append(orderid);
+                    break;
+                
+                case "Pizza":
+                    img.src = "https://th.bing.com/th/id/OIP.J1DREjj_f9tqZe-v-P9eSgHaEK?w=303&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7";
+                    desc.innerText = `Your ${food} is ready!`;
+                    orderid.innerText = `Order id is #${id}`;
+                    display.append(img, desc);
+                    orderId.append(orderid);
+                    break;
+                
+                case "Chicken Wings":
+                    img.src = "https://th.bing.com/th/id/OIP.ttJ597dAqSj1OqnjSq2j1wAAAA?w=264&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7";
+                    desc.innerText = `Your ${food} is ready!`;
+                    orderid.innerText = `Order id is #${id}`;
+                    display.append(img, desc);
+                    orderId.append(orderid);
+                    break;
+
+                case "Fries":
+                    img.src = "https://th.bing.com/th/id/OIP.gB1d3YBA_d9S0Srq0PfvUgHaE8?w=292&h=195&c=7&r=0&o=5&dpr=1.5&pid=1.7";
+                    desc.innerText = `Your ${food} is ready!`;
+                    orderid.innerText = `Order id is #${id}`;
+                    display.append(img, desc);
+                    orderId.append(orderid);
+                    break;
+            }
+        })
+
+        foodProm.catch(function(error) {
+            img.src = "https://th.bing.com/th/id/OIP.8rbNrekVky9iCPAD3HIk3wHaEK?w=321&h=181&c=7&r=0&o=5&dpr=1.5&pid=1.7";
+            desc.innerText = error;
+            display.append(img, desc);
+        })
+        counter++;
+    }
+</script>

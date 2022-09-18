@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family:sans-serif;
+        }
+        #navbar{
+            display: flex;
+            justify-content: space-around;
+            width: 60%;
+            height: 70px;
+            margin: auto;
+            border: 3px solid black;
+            align-items: center;
+            border-radius:5px;
+        }
+
+        #navbar > div{
+            background-color:black;
+            color: white;
+            font-size: 20px;
+            width: 100px;
+            height: 45px;
+            border-radius: 5px;
+            text-align: center;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div>SignUp</div>
+        <div>Login</div>
+        <div>Men</div>
+        <div>Women</div>
+    </div>
+    
+        <p>Email</p>
+        <input id="email" type="text" placeholder="Enter email">
+        <p>Phone Number</p>
+        <input id="phone" type="text" placeholder="Enter phone number">
+        <p>Password</p>
+        <input id="pass" type="password" placeholder="Enter password">
+        <button onclick="submitFun()">Submit</button>
+
+</body>
+</html>
+
+<script>
+   
+    var signupArr = JSON.parse(localStorage.getItem("signupList")) || [];
+    
+    function submitFun(){
+       
+         var form = document.querySelector("#signupForm");
+
+         var signupObj={
+             email: document.querySelector("#email").value,
+             phone: document.querySelector("#phone").value,
+             pass: document.querySelector("#pass").value
+         };
+         signupArr.push(signupObj);
+         localStorage.setItem("signupList", JSON.stringify(signupArr));
+         location.href = "login.html";
+        //  document.querySelector("input[type='submit']").addEventListener("click", function(){
+        //      window.location.href = "login.html";
+        //  });
+    }
+</script>

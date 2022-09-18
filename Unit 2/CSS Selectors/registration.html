@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        #registration{
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+        }
+        #left{
+            width: 40%;
+            margin-right: 70px;
+            
+        }
+        #right{
+            width: 40%;
+            background-color: black;
+            color: white;
+            padding-left: 20px;
+            
+        }
+        #right > div:nth-child(1){
+            margin-bottom: -10px;
+        }
+        #right > div > h1{
+            margin-top: -10px;
+            margin-bottom: 40px;
+        }
+        #right > div {
+            margin-bottom: 40px;
+        }
+        .ip{
+            margin-bottom: 3px;
+        }
+        .pre-text{
+           margin-top: 0px;
+            color: red;
+        }
+        #btn{
+            width: 170px;
+            height: 30px;
+            background-color: black;
+            color: white;
+            border-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="registration">
+        <div id="left">
+            <p class="ip" >NAME</p>
+            <input type="text">
+            <p class="ip">EMAIL</p>
+            <input type="email">
+            <p class="ip">MOBILE</p>
+            <input type="tel">
+            <p class="pre-text">Enter a valid mobile</p>
+            <button id="btn">REGISTER</button>
+        </div>
+        <div id="right">
+                <div>
+                    <p>NAME</p>
+                    <h1>MASAI</h1>
+                </div>
+                <div>
+                    <p>EMAIL</p>
+                    <p>email@masaischool.com</p>
+                </div>
+                <div>
+                    <p>MOBILE</p>
+                    <p>9876543210</p>
+                </div>
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #displayVid{
+            width: 60%;
+            margin: auto;
+            margin-top: 50px;
+        }
+        iframe{
+            width: 100%;
+            /* margin: auto; */
+            /* border: 1px solid red; */
+            height: 550px;
+        }
+        
+        #left{
+            margin-left: 30px;
+            
+        }
+        #left img{
+            height: 40px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+        <div id="left">
+            <img src="https://th.bing.com/th/id/OIP.MruU_1fBIrki4bXAqbJTHgHaB2?w=345&h=87&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="">
+           
+        </div>
+    
+    <div id="displayVid"></div>
+</body>
+</html>
+<script>
+
+    let video = JSON.parse(localStorage.getItem("videolocal"));
+    console.log(video);
+
+    let title = document.createElement('p');
+    title.innerText = video[0].snippet.title;
+
+    let iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${video[0].id.videoId}`;
+    iframe.allow = "fullscreen"
+
+    document.getElementById("displayVid").append(iframe, title)
+
+
+
+</script>

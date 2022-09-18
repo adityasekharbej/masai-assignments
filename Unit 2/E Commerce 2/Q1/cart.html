@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h1{
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        #details {
+            float: right;
+            font-size:20px;
+            font-weight:bold;
+            margin-right: 50px;
+        }
+        #checkout {
+          float: right;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Shopping Cart</h1>
+    <div id="details"></div>
+    <div id="container"></div>
+    <button id="checkout">Checkout</button>
+  </body>
+</html>
+<script>
+  
+  var cartArr = JSON.parse(localStorage.getItem("cartItems"));
+  cartArr.map(function (elem) {
+    var mainDiv = document.createElement("div");
+
+    var img = document.createElement("img");
+    img.setAttribute("src", elem.image_url);
+
+    var name = document.createElement("h3");
+    name.innerText = elem.name;
+
+    var innerDiv = document.createElement("div");
+
+    var price = document.createElement("p");
+    price.innerText = elem.price;
+
+    var strikedoffprice = document.createElement("p");
+    strikedoffprice.innerText = elem.strikedoffprice;
+
+    innerDiv.append(price, strikedoffprice);
+    innerDiv.setAttribute("class", "priceDiv");
+
+    mainDiv.append(img, name, innerDiv);
+
+    document.querySelector("#container").append(mainDiv);
+  });
+
+ 
+  var total = cartArr.reduce(function(acc, elem) {
+      return acc+elem.price;
+  },0);
+
+  var totalItem = document.createElement("p");
+  totalItem.innerText = "Total Items: " + cartArr.length;
+  
+  var totalPrice = document.createElement("p");
+  totalPrice.innerText = "Total Price: " + total;
+
+  var coupon = document.createElement("input");
+  coupon.setAttribute("placeholder","enter promo code");
+
+  var aplBtn = document.createElement("button")
+  aplBtn.innerText = "Apply Promo";
+  aplBtn.setAttribute("id", "couponBtn")
+  aplBtn.onclick = function() {
+    if(coupon.value=="masai30"){
+      var discTotal = total*(70/100);
+      totalPrice.innerText = "Total Price: " + discTotal;
+    }
+  }
+
+  document.querySelector("#details").append(totalItem, totalPrice, coupon, aplBtn);
+
+ 
+ 
+  // document.querySelector("#couponBtn").addEventListener("click",function(){
+  //   if(coupon.value == "masai30"){
+  //     total = total - total*(30/100);
+  //   }
+  // })
+
+  
+  
+
+  document.querySelector("#checkout").addEventListener("click",function(){
+    window.location.href="success.html"
+  })
+
+</script>
